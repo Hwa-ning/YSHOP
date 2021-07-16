@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title><%= storeInfo.shopName %> 회원가입</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/css/reg.css" />
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script>
+	let possible_ID = false;
+	let possible_Phone = false;
+	let possible_Email = false;
+	$(document).ready(function(){
+		$("#idcheck").click(function(){
+			if($("#input_id").val()=="")
+				alert("ID를 입력해주세요!");
+			else{
+			$.ajax({
+				url:'/customer/<%=indexURL%>/idcheck',
+				type:'POST',
+				async:true,
+				data : {
+					test:$("#input_id").val()
+					},
+				dataType:'json',
+				success:function(data){
+					if(data.checkID == true){
+						alert("사용가능한 ID입니다.");
+						possible_ID = true;
+						$("#input_id").attr("readonly",true);
+						$("#input_id").css("background",'lightgrey');
+					}
+					else
+						alert("사용불가능한 ID입니다.");
+				},
+				error: function(data){
+					console.log("ID 중복확인 Error");
+					alert("서버 에러 관리자에게 문의 해주세요.");
+				}
+			});
+		}
+		});
+		$("#phonecheck").click(function(){
+			if($("#input_phone").val()=="")
+				alert("전화번호를 입력해주세요!");
+			else{
+			$.ajax({
+				url:'/customer/<%=indexURL%>/phonecheck',
+				type:'POST',
+				async:true,
+				data : {
+					test:$("#input_phone").val()
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.checkPhone == true){
+						alert("가입가능한 전화번호입니다.");
+						possible_Phone = true;
+						$("#input_phone").attr("readonly",true);
+						$("#input_phone").css("background",'lightgrey');
+					}
+					else
+						alert("이미 가입된 전화번호입니다.");
+				},
+				error: function(data){
+					console.log("전화번호 중복확인 Error");
+					alert("서버 에러 관리자에게 문의 해주세요.");
+				}
+			});
+		}
+		});
+		$("#emailcheck").click(function(){
+			if($("#input_email").val()=="")
+				alert("이메일 입력해주세요!");
+			else{
+			$.ajax({
+				url:'/customer/<%=indexURL%>/emailcheck',
+				type:'POST',
+				async:true,
+				data : {
+					test:$("#email").val()
+				},
+				dataType:'json',
+				success:function(data){
+					if(data.checkEmail == true){
+						alert("가입가능한 이메일입니다.");
+						possible_Email = true;
+						$("#input_email").attr("readonly",true);
+						$("#input_email").css("background",'lightgrey');
+					}
+					else
+						alert("이미 가입된 이메일입니다.");
+				},
+				error: function(data){
+					console.log("이메일 중복확인 Error");
+					alert("서버 에러 관리자에게 문의 해주세요.");
+				}
+			});
+		}
+		});
+		$('form[name="regF"]').bind('submit',function(){
+			if($("#input_pw").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+			if($("#input_name").val()==""){
+				alert("이름을 입력해주세요.");
+				return false;
+			}
+			if($("#input_birthdate").val()==""){
+				alert("생년월일을 입력해주세요.");
+				return false;
+			}
+			if(!$('input:radio[name="gender"]').is(':checked')){
+				alert("성별을 선택해주세요.");
+				return false;
+			}
+			if($("#input_address").val()==""){
+				alert("주소를 입력해주세요.");
+				return false;
+			}
+			if(!possible_ID){
+				alert("아이디 중복확인을 먼저 해주세요.");
+				return false;
+			}
+			if(!possible_Phone){
+				alert("전화번호 중복확인을 먼저 해주세요.");
+				return false;
+			}
+			if(!possible_Email){
+				alert("이메일 중복확인을 먼저해주세요.");
+				return false;
+			}
+		})
+	});
+	</script>
+</head>
+<body>
+	<header>
+		<%- include('navbar.ejs')%>
+	</header>
+	<div id = "regDiv">
+		<img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/tes.png">
+	<section>
+		<form name="regF" method="post" action="/customer/<%=indexURL%>/reg_process" onsubmit="chkSubmit();">
+			<table style="margin-left:auto;margin-right:auto;">
+				<tr>
+					<td>아이디&nbsp;</td>
+					<td><input id = "input_id" type="text" name="id" value="" placeholder="아이디"></td>
+					<td><button type="button" id = "idcheck">아이디 중복체크</button></td>
+				</tr>
+				<tr>
+					<td>비밀번호&nbsp;</td>
+					<td><input id="input_pw" type="password" name="pw" value="" placeholder="비밀번호"></td>
+				</tr>
+				<tr>
+					<td>이름&nbsp;</td>
+					<td><input id="input_name" type="text" name="uname" value="" placeholder="이름"></td>
+				</tr>
+				<tr>
+					<td>전화번호&nbsp;</td>
+					<td><input id = "input_phone" type="text" name="phone" value="" placeholder="전화번호"></td>
+					<td><button type="button" id = "phonecheck">전화번호 중복체크</button></td>
+				</tr>
+				<tr>
+					<td>이메일&nbsp;</td>
+					<td><input id="input_email"  type="email" name="email" value="" placeholder="이메일"></td>
+					<td><button type="button" id = "emailcheck">이메일 중복체크</button></td>
+					</tr>
+				<tr>
+					<td>생일&nbsp;</td>
+					<td><input id="input_birthdate"  type="text" name="birthdate" value="" placeholder="생년월일"></td>
+				</tr>
+				<tr>
+					<td style="height:50px">성별&nbsp;</td>
+					<td style="text-align: left;"><input id="input_gender" type="radio" name="gender" value="1">&nbsp;남성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender" value="0">&nbsp;여성</td>
+				</tr>
+				<tr>
+					<td>주소&nbsp;</td>
+					<td><input id="input_address" type="text" name="address" value="" placeholder="주소"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input id="regSubmit" type="submit" value="회원가입"></td>
+				</tr>
+			</table>
+		</form>
+		</section>
+	</div>
+	<footer>
+		<%- include ('footer') %>
+	</footer>
+</body>
+</html>

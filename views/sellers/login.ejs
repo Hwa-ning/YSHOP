@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Y# 로그인</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/css/main.css" />
+	<style>
+		.find_info {
+			color: #999;
+			font-size: 0.9em;
+			line-height: 1em;
+			margin: 2em 0 0 0;
+			padding: 0;
+			text-align: center;
+		}
+
+		.find_info a {
+			color: inherit;
+		}
+
+		.find_info li {
+			border-left: solid 1px #dddddd;
+			display: inline-block;
+			list-style: none;
+			margin-left: 1em;
+			padding-left: 1em;
+		}
+
+		.find_info li:first-child {
+			border-left: 0;
+			margin-left: 0;
+			padding-left: 0;
+		}
+	</style>
+</head>
+
+<body class="is-preload">
+	<div id="page-wrapper">
+
+		<!-- Main -->
+		<section id="main" class="container medium">
+			<header>
+				<a href="/sellers/home">
+					<h2>Y#</h2>
+				</a>
+			</header>
+			<div class="box">
+				<form method="post" action="/sellers/login_process">
+					<div class="row gtr-50 gtr-uniform">
+						<div class="col-12">
+							<p style="margin-bottom: 0.5em;">아이디</p>
+							<input type="text" name="id" id="id" value="" placeholder="아이디" />
+						</div>
+						<div class="col-12">
+							<p style="margin-bottom: 0.5em;">비밀번호</p>
+							<input type="password" name="pw" id="password" value="" placeholder="비밀번호" />
+						</div>
+						<div class="col-12">
+							<ul class="actions special">
+								<li><input type="submit" value="로그인" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+				<div class="col-12 find_info">
+					<ul>
+						<li><a href="#">아이디 찾기</a></li>
+						<li><a href="#">비밀번호 찾기</a></li>
+						<li><a href="/sellers/signup1">회원가입</a></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+				<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+				<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>&copy; Untitled. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

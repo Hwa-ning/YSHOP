@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title><%= storeInfo.shopName %> 로그인</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+	<header>
+		<%- include('navbar.ejs')%>
+	</header>
+	<div id = "loginDiv">
+		<img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/yshop_icon/b_apricot.png">
+	<section>
+		<form method="post" action="/customer/<%=indexURL%>/login_process">
+			<table>
+				<tr>
+					<td><input type="text" name="id" value="" placeholder=" 아이디"></td>
+				</tr>
+				<tr>
+					<td><input type="password" name="pw" value="" placeholder=" 비밀번호"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="로그인"></td>
+				</tr>
+			</table>
+		</form>
+		<br>
+		<a class="loginMenu" href="#">아이디 찾기</a> | 
+		<a class="loginMenu" href="#">비밀번호 찾기</a> | 
+		<a class="loginMenu" href="/customer/<%=indexURL%>/registration">회원가입</a>
+	</section>
+	</div>
+	<footer>
+		<%- include ('footer') %>
+	</footer>
+</body>
+</html>

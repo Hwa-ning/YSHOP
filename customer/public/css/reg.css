@@ -1,0 +1,58 @@
+#regDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 700px;
+  text-align: center;
+  border-radius: 6px;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+#regDiv input {
+  width: 300px;
+  height: 50px;
+  background-color: ghostwhite;
+  border: solid 1px lightgray;
+}
+
+#regDiv input[type="radio"] {
+  width: auto;
+  height: auto;
+  text-align: left;
+}
+
+#regDiv input[type="submit"] {
+  width: 100%;
+  background-color: #ff9763;
+  color: white;
+}
+
+#regDiv table {
+  margin-left: auto;
+  margin-right: auto;
+}
+#regDiv td:nth-child(1) {
+  text-align: right;
+}
+#regDiv td:nth-child(3) {
+  text-align: left;
+}
+#regDiv td:nth-child(2n + 1) {
+  width: 200px;
+}
+#regDiv button {
+  background-color: mediumslateblue;
+  color: white;
+  width: 150px;
+  height: 45px;
+  border: 0px;
+}
+
+#loginDiv img {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}

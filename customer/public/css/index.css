@@ -1,0 +1,38 @@
+tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+td div {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 300px;
+  height: 500px;
+}
+.productList {
+  text-align: center;
+  display: block;
+  font-size: 40px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+#productListTab {
+  margin-left: auto;
+  margin-right: auto;
+}
+.productTitle {
+  font-size: 24px;
+  text-align: center;
+}
+
+.productPrice {
+  text-align: right;
+  margin-right: 10px;
+}
+
+#productListTab img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+}

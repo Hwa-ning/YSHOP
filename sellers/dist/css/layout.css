@@ -1,0 +1,53 @@
+/* layout.css */
+
+/* pc */
+
+.pc {
+    min-height: 100vh;
+    min-width: 1200px;
+    display: grid;
+    grid-template-columns: 210px auto;
+    grid-template-rows: 55px auto 238px;
+}
+
+/* Header */
+
+.pc > header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+/* Sidebar */
+
+.pc > aside {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+/* Content */
+
+.pc > main {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+/* Footer */
+
+.pc > footer {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+/* mobile */
+
+@media (max-width: 991.98px) {
+
+}

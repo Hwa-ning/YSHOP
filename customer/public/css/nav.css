@@ -1,0 +1,75 @@
+#container {
+  overflow-x: hidden;
+}
+.topnavbar {
+  height: 40px;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+.navbar-light {
+  background: #ff9763;
+}
+.container-fluid {
+  margin-left: 300px;
+  margin-right: 300px;
+}
+.search {
+  background: white;
+  border-radius: 10px;
+}
+.search ul {
+  list-style: none;
+  margin: 0 0;
+  padding: 0 0;
+}
+.search li {
+  float: left;
+}
+.container-fluid .login {
+  font-size: 16px;
+  border: solid white 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.white {
+  color: white;
+  text-decoration: none;
+}
+.mallNavTop {
+  text-align: center;
+  vertical-align: center;
+  height: 160px;
+}
+#title {
+  display: inline-block;
+  color: black;
+  margin-top: 40px;
+  text-decoration: none;
+  vertical-align: center;
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 60px;
+}
+::placeholder {
+  font-size: 12px;
+}
+.center {
+  text-align: center;
+}
+.dropdown-menu li {
+  position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+  right: 100%;
+  left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+  display: block;
+}
