@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title><%= storeInfo.shopName %> 상품 구매</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        function checkBtn(){
+            let form = document.createElement("form");
+            form.setAttribute("method","POST");
+            form.setAttribute("action","/customer/<%=indexURL%>/buyProduct_process");
+    
+            let hiddenField1 = document.createElement("input");
+            hiddenField1.setAttribute("type","hidden");
+            let addressInfo = $('#addressInfo').val();
+            hiddenField1.setAttribute("name","address");
+            hiddenField1.setAttribute("value",addressInfo);
+    
+            let hiddenField2 = document.createElement("input");
+            hiddenField2.setAttribute("type","hidden");
+            let obj = {};
+            $('.DD').each(function(){
+            let text = $(this).val();
+            let tempArr = text.split(',');
+            alert(tempArr);
+            obj[tempArr[0]] = tempArr[1] +"," +tempArr[2] +","+ tempArr[3];
+            });
+            hiddenField2.setAttribute("name","buyProductList");
+            hiddenField2.setAttribute("value",JSON.stringify(obj));
+            form.appendChild(hiddenField1);
+            form.appendChild(hiddenField2);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+    <style>
+        #regDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 700px;
+  text-align: center;
+  border-radius: 6px;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+#regDiv input {
+  width: 300px;
+  height: 50px;
+  background-color: ghostwhite;
+  border: solid 1px lightgray;
+}
+
+#regDiv input[type="radio"] {
+  width: auto;
+  height: auto;
+  text-align: left;
+}
+
+#regDiv input[type="submit"] {
+  width: 100%;
+  background-color: #ff9763;
+  color: white;
+}
+
+#regDiv table {
+  margin-left: auto;
+  margin-right: auto;
+}
+#regDiv td:nth-child(1) {
+  text-align: right;
+}
+#regDiv td:nth-child(3) {
+  text-align: left;
+}
+#regDiv td:nth-child(2n + 1) {
+  width: 200px;
+}
+#regDiv button {
+  background-color: mediumslateblue;
+  color: white;
+  width: 150px;
+  height: 45px;
+  border: 0px;
+}
+
+#loginDiv img {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+    </style>
+</head>
+<body>
+	<header>
+		<%- include('navbar.ejs')%>
+	</header>
+	<section>
+            <div style="text-align: center; margin-top: 50px; margin-bottom: 50px;"><h3>주문하기</h3></div>
+			<table style="margin-left:auto;margin-right:auto;">
+                <% let jsonProducts = JSON.parse(products); %>
+                <% let totalMoney = 0 %>
+                <tr>
+                    <td colspan = "3" style="text-align: left;">
+                        <h5>[주문상품 정보]</h5>
+                    </td>
+                </tr>
+                <% for(const item in jsonProducts){ %>
+                    <% let tempItem = jsonProducts[item].split(','); %>
+                <tr>
+                   <td>
+                        <img src="<%=thumbnail %>" style="width : 200px; height : 200px; margin-left : auto; margin-right :auto">
+                    </td>
+                    <td style="width:600px">
+                        <span style="font-size: 24px;"><%= productTitle %></span><br>
+                        <input class="DD" type="hidden" value="<%=item+","+tempItem%>">
+                        <%= tempItem[2] %><br>
+                        <%= tempItem[0] %>개
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="3">
+                                <%= tempItem[1] %>원
+                                <% totalMoney += Number(tempItem[1]); %>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <hr>
+                    </td>
+                </tr>
+                <% } %>
+                <tr>
+                    <td colspan="3" style="text-align: right;">
+                        <h5>총 결제 금액 <span style="color:mediumslateblue"><%= totalMoney%>원</span></h5>
+                    </td>
+                </tr>
+                <tr style="height:50px">
+                    
+                </tr>
+                <tr>
+                    <td colspan = "3" style="text-align: left;">
+                        <h5>[주문자 정보]</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>아이디</strong>
+                    </td>
+                    <td colspan="2">
+                        <input type="text" value="<%=loginInfo%>" readonly style="background: lightgray;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>휴대폰</strong>
+                    </td>
+                    <td colspan="2">
+                        <input type="text" max="999"> -
+                        <input type="text" max="9999"> -
+                        <input type="text" max="9999">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>이메일</strong>
+                    </td>
+                    <td colspan="2">
+                        <input type="email">
+                    </td>
+                </tr>
+                <tr style="height:50px">
+                    
+                </tr>
+                <tr style="margin-top : 100px">
+                    <td colspan = "3" style="text-align: left;">
+                        <h5>[배송지 정보]</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>수령인</strong>
+                    </td>
+                    <td colspan="2">
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>휴대폰</strong>
+                    </td>
+                    <td colspan="2">
+                        <input type="text" max="999"> -
+                        <input type="text" max="9999"> -
+                        <input type="text" max="9999">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>배송주소</strong>
+                    </td>
+                    <td colspan="2">
+                        <input id="addressInfo"type="text" style="width : 590px">
+                    </td>
+                </tr>
+                <tr style="height:50px">
+                    
+                </tr>
+				<tr>
+					<td colspan="3" style="text-align: right;">
+                    <button onclick="checkBtn()"
+                    style= "background-color: mediumslateblue;
+                        color: white; width: 150px;
+                        height: 45px; border: 0px;">
+                        구매하기</button></td>
+				</tr>
+			</table>
+		</section>
+	</div>
+	<footer>
+		<%- include ('footer') %>
+	</footer>
+</body>
+</html>

@@ -1,6 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href = "/css/nav.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <!--공통네비바 상단-->
@@ -12,23 +11,118 @@
         <a class="login white" href = "/customer/<%=indexURL%>/login">로그인</a>
         <% }else{ %>
         <%= loginInfo%>님 환영합니다!
-        <a class="login white" href="/customer/<%=indexURL%>/logout_process">로그아웃</a></span>
+        <a class="login white" href="/customer/<%=indexURL%>/logout_process">로그아웃</a>
+        <a class="login white" href="/customer/<%=indexURL%>/myPage">마이페이지</a>
+        </span>
         <% } %>
     </div>
 </nav>
+<script>
+    function check(){
+        let s = document.search;
+        console.log("검색어 CHECK");
+        if(s.name.value == ""){
+            alert("검색어를 입력해주세요.");
+            s.name.focus();
+            return false;
+        }
+        else{
+            let temp = encodeURI(s.name.value);
+            s.name.value = temp;
+            return true;
+        }
+    }
+</script>
+<style>
+    #container {
+  overflow-x: hidden;
+}
+.topnavbar {
+  height: 40px;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+.navbar-light {
+  background: #ff9763;
+}
+.container-fluid {
+  margin-left: 300px;
+  margin-right: 300px;
+}
+.search {
+  background: white;
+  border-radius: 10px;
+}
+.search ul {
+  list-style: none;
+  margin: 0 0;
+  padding: 0 0;
+}
+.search li {
+  float: left;
+}
+.container-fluid .login {
+  font-size: 16px;
+  border: solid white 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.white {
+  color: white;
+  text-decoration: none;
+}
+.mallNavTop {
+  text-align: center;
+  vertical-align: center;
+  height: 160px;
+}
+#title {
+  display: inline-block;
+  color: black;
+  margin-top: 40px;
+  text-decoration: none;
+  vertical-align: center;
+  font-family: "Do Hyeon", sans-serif;
+  font-size: 60px;
+}
+::placeholder {
+  font-size: 12px;
+}
+.center {
+  text-align: center;
+}
+.dropdown-menu li {
+  position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+  right: 100%;
+  left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+  display: block;
+}
+
+</style>
 <!--공통네비바 하단-->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a style="color:white" class="navbar-brand white" href="/customer/<%=indexURL%>">
             <img src="<%= storeInfo.image %>" style="border-radius:50%;" width="30" height="30" class="d-inline-block align-text-top">
             <%= storeInfo.description %>
-            <!--일단 구글 박아둠-->
         </a>
-        <form class="d-flex">
+        <form name = "search" class="d-flex" action="/customer/<%=indexURL%>/search" method="GET" onsubmit="return check()">
             <div class = "search">
                 <ul>
-                    <li><input class="form-control me-2" type="text" placeholder = "검색어를 입력해보세요"></li>
-                    <li><button class="btn" type="submit" ><img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/clolse.png" width = "20px" height = "20px"></button></li>
+                    <li><input name="name" class="form-control me-2" type="text" placeholder = "검색어를 입력해보세요"></li>
+                    <li><button class ="btn" type="submit"><img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/clolse.png" alt="" width = "20px" height = "20px"></button></li>
                 </ul>
             </div>
         </form>
@@ -41,28 +135,56 @@
 </div>
 
 <!--가게네비바 하단(카테고리 선택하는 부분)-->
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border:solid 1px gray">
     <div class="container-fluid">
-    <a class="navbar-brand" href="#">전체상품</a>
-        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false">
+        <a class="navbar-brand" href="/customer/<%=indexURL%>">전체상품</a>
+        <a class="navbar-brand" href="/customer/<%=indexURL%>/notice">공지사항</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <% for(let i=0;i<categoryInfo['대분류'].length;i++) { %>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <%= categoryInfo['대분류'][i].name %>
-                </a>
-                <% let temp_mid = categoryInfo['대분류'][i].name; %>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% for(let j=0;j<categoryInfo[temp_mid]['중분류'].length;j++) { %>
-                    <li><a class="dropdown-item" href="#"><%= categoryInfo[temp_mid]['중분류'][j].name %></a></li>
-                <% } %>
-                </ul>
-            </li>
-            <% } %>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <% for(let i=0;i<categoryInfo['대분류'].length;i++) { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown">
+                            <%= categoryInfo['대분류'][i].name %>
+                        </a>
+                        <% let temp_mid=categoryInfo['대분류'][i].name; %>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href= "/customer/<%=indexURL%>/group/<%= categoryInfo['대분류'][i].pk %>">
+                                        <%= categoryInfo['대분류'][i].name %> 전체보기
+                                    </a>
+                                </li>
+                                <% for(let j=0;j<categoryInfo[temp_mid]['중분류'].length;j++) { %>
+                                    <li>
+                                        <a class="dropdown-item" href="/customer/<%=indexURL%>/group/<%= categoryInfo[temp_mid]['중분류'][j].pk %>">
+                                            <%= categoryInfo[temp_mid]['중분류'][j].name %>
+                                            <% if(categoryInfo[temp_mid][categoryInfo[temp_mid]['중분류'][j].name]['소분류'].length>0){ %>
+                                                &raquo; <!--- ▷--->
+                                            <% } %>
+                                        </a>
+                                        <% let temp_small=categoryInfo[temp_mid]['중분류'][j].name %>
+                                            <% if(categoryInfo[temp_mid][temp_small]['소분류'].length>0) { %>
+                                                <ul class="submenu dropdown-menu">
+                                                    <% for(let k=0;k<categoryInfo[temp_mid][temp_small]['소분류'].length;k++) { %>
+                                                        <li>
+                                                            가나다라마바사
+                                                            <a class="dropdown-item" href="/customer/<%=indexURL%>/group/<%= categoryInfo[temp_mid][temp_small]['소분류'][k].pk %>">
+                                                                <%= categoryInfo[temp_mid][temp_small]['소분류'][k].name %>
+                                                            </a>
+                                                        </li>
+                                                        <% } %>
+                                                </ul>
+                                                <% } %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
     </div>
-</div>
 </nav>

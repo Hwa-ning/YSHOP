@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title><%= storeInfo.shopName %> 아이디 찾기</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+</head>
+<style>
+	.loginMenu {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+#loginDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 500px;
+  text-align: center;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+#loginDiv input:not([type="radio"]) {
+  width: 300px;
+  height: 50px;
+  background-color: ghostwhite;
+  border: solid 1px lightgray;
+}
+
+#loginDiv input[type="submit"] {
+  background-color: #f5b47a;
+  color: white;
+}
+
+#loginDiv table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginDiv img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+	<header>
+		<%- include('navbar.ejs')%>
+	</header>
+	<div id = "loginDiv" style ="height : 600px">
+		<img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/yshop_icon/b_apricot.png">
+            <h2>아이디 찾기</h2><br/><br/>
+            <input type="radio" id="findByEmail" name="findID" onchange="setDisplay()" checked>이메일
+            <input type="radio" id="findByPhone" name="findID" onchange="setDisplay()" style="margin-left:20px;">전화번호<br/><br/>
+        
+            <form action="/customer/<%=indexURL%>/findID_process" method="POST">
+                <input type="text" name="name" placeholder="가입시 입력한 이름을 입력해주세요."><br/>
+                <div id="flag">
+					<input type="hidden" name="key" value="email">
+                    <input type="text" name="findVal" placeholder="가입시 입력한 이메일을 입력해주세요." style="margin-top: 20px;"><br/><br/>
+                </div>
+                <input type="submit" value="아이디 찾기">
+            </form>
+		<br/>
+	</section>
+	</div>
+	<footer>
+		<%- include ('footer') %>
+	</footer>
+</body>
+<script>
+	function setDisplay(){
+		if($('input:radio[id=findByEmail]').is(':checked')){
+			$('#flag *').remove();
+            let tmpHTML = `<div id="flag"><input type="hidden" name="key" value="email"><input type="text" name="findVal" placeholder="가입시 입력한 이메일을 입력해주세요." style="margin-top: 20px;"><br/><br/></div>`
+			$('#flag').append(tmpHTML);
+		}else{
+			$('#flag *').remove();
+            let tmpHTML = `<div id="flag"><input type="hidden" name="key" value="phone"><input type="text" name="findVal" placeholder="가입시 입력한 전화번호를 입력해주세요." style="margin-top: 20px;"><br/><br/></div>`
+			$('#flag').append(tmpHTML);
+		}
+	}
+</script>
+</html>

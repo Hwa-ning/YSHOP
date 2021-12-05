@@ -4,8 +4,48 @@
 	<title><%= storeInfo.shopName %> 로그인</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="/css/login.css" />
 </head>
+<style>
+	.loginMenu {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+#loginDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 500px;
+  text-align: center;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+#loginDiv input:not([type="radio"]) {
+  width: 300px;
+  height: 50px;
+  background-color: ghostwhite;
+  border: solid 1px lightgray;
+}
+
+#loginDiv input[type="submit"] {
+  background-color: #f5b47a;
+  color: white;
+}
+
+#loginDiv table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginDiv img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+</style>
 <body>
 	<header>
 		<%- include('navbar.ejs')%>
@@ -27,8 +67,8 @@
 			</table>
 		</form>
 		<br>
-		<a class="loginMenu" href="#">아이디 찾기</a> | 
-		<a class="loginMenu" href="#">비밀번호 찾기</a> | 
+		<a class="loginMenu" href="/customer/<%=indexURL%>/findID">아이디 찾기</a> | 
+		<a class="loginMenu" href="/customer/<%=indexURL%>/findPW">비밀번호 찾기</a> | 
 		<a class="loginMenu" href="/customer/<%=indexURL%>/registration">회원가입</a>
 	</section>
 	</div>

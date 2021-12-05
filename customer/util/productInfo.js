@@ -25,8 +25,15 @@ const GetProductInfo = (schema, productPK, callback) => {
         let option = [];
         for (let i = 0; i < ProductInfo.Option.length; i++)
             option.push(ProductInfo.Option[i]);
-
-        callback(undefined, { product, image, option })
+        let reviewList = [];
+        for (let i = 0; i < ProductInfo.Review.length; i++)
+            reviewList.push(ProductInfo.Review[i]);
+        console.log("reviewList :", reviewList)
+        let QnAList = [];
+        for (let i = 0; i < ProductInfo.QnA.length; i++)
+            QnAList.push(ProductInfo.QnA[i]);
+        console.log("QnAList :", QnAList)
+        callback(undefined, { product, image, option, reviewList, QnAList })
     })
 }
 module.exports = GetProductInfo;

@@ -7,11 +7,13 @@
   text-align: center;
   border: solid darkgray 1px;
 }
+
 #divSummary div {
   width: 100%;
   height: 100%;
 }
-#divSummary table {
+
+#divSummary>table {
   margin-left: auto;
   margin-right: auto;
   table-layout: fixed;
@@ -31,6 +33,7 @@
   text-align: center;
   font-size: 25px;
 }
+
 #thumbnail {
   margin-left: auto;
   margin-right: auto;
@@ -38,37 +41,45 @@
   height: 100%;
   object-fit: contain;
 }
+
 #orginalPrice {
   text-decoration-line: line-through;
   color: gray;
   font-size: 15px;
 }
+
 #dcPrice {
   font-weight: bolder;
   font-size: 25px;
 }
+
 .productSummary {
   margin-left: auto;
   margin-right: auto;
 }
+
 #totalPrice {
   color: saddlebrown;
   font-size: 25px;
   font-weight: bolder;
 }
+
 #productName {
   font-weight: bolder;
   font-size: 30px;
 }
+
 .stockDelete {
   background-color: white;
 }
+
 #divDetail {
   margin-left: auto;
   margin-right: auto;
   width: 1000px;
   text-align: center;
 }
+
 #divDetail img {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -76,6 +87,7 @@
   height: 800px;
   object-fit: contain;
 }
+
 .btnCount {
   background-color: mediumslateblue;
   color: white;
@@ -83,6 +95,7 @@
   height: auto;
   border: 0px;
 }
+
 .btnDelete {
   background-color: white;
   width: 5px;

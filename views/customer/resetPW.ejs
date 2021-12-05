@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title><%= storeInfo.shopName %> 비밀번호 재설정</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+</head>
+<style>
+    .loginMenu {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+#loginDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 500px;
+  text-align: center;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+}
+
+#loginDiv input:not([type="radio"]) {
+  width: 300px;
+  height: 50px;
+  background-color: ghostwhite;
+  border: solid 1px lightgray;
+}
+
+#loginDiv input[type="submit"] {
+  background-color: #f5b47a;
+  color: white;
+}
+
+#loginDiv table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loginDiv img {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+</style>
+<body>
+	<header>
+		<%- include('navbar.ejs')%>
+	</header>
+    <script>
+        function check_PW(){
+            let pw1 = document.getElementById("pw1").value;
+            let pw2 = document.getElementById("pw2").value;
+            if(pw1 == "" || pw1 == null){
+                alert("비밀번호를 입력해주세요.");
+                return false;
+            }
+            if(pw2 == "" || pw2 == null){
+                alert("비밀번호 확인을 입력해주세요.");
+                return false;
+            }
+            if(pw1 !== pw2){
+                alert("재설정 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+    <section>
+	<div id = "loginDiv" style ="height : 600px">
+		<img src="https://yshop-image.s3.ap-northeast-2.amazonaws.com/yshop_icon/b_apricot.png">
+            <h2>비밀번호 재설정</h2><br/><br/>
+            <% if(ID != "" && ID != null) { %> 
+            <form action="/customer/<%=indexURL%>/resetPW_process" method="POST" onsubmit="return check_PW()">
+                <input type="text" name="ID" value = "<%=ID%>" readonly style="background: lightgray;"><br/>
+                <input id = "pw1" type="password" name="PW" placeholder="재설정 비밀번호 입력"><br/>
+                <input id = "pw2" type="password" name="PW_check" placeholder="비밀번호 확인"><br/>
+                <input type="submit" value="비밀번호 재설정">
+            </form>
+            <% }else { %>
+                <h1> 올바르지 못한 접근입니다.</h1>
+            <% } %>
+		<br/>
+	</section>
+	</div>
+	<footer>
+		<%- include ('footer') %>
+	</footer>
+</body>
+</html>
